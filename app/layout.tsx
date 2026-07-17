@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Cormorant_Garamond, Marcellus, Manrope, JetBrains_Mono } from 'next/font/google'
+import { Cormorant_Garamond, Marcellus, Manrope, JetBrains_Mono, Jost } from 'next/font/google'
 import { LenisProvider } from '@/components/layout/LenisProvider'
 import './globals.css'
 
@@ -8,6 +8,13 @@ const cormorant = Cormorant_Garamond({
   weight: ['400', '500', '600'],
   style: ['normal', 'italic'],
   variable: '--font-serif',
+  display: 'swap',
+})
+
+const jost = Jost({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600'],
+  variable: '--font-jost',
   display: 'swap',
 })
 
@@ -42,7 +49,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="pt-BR"
-      className={`${cormorant.variable} ${marcellus.variable} ${manrope.variable} ${jetbrainsMono.variable}`}
+      className={`${cormorant.variable} ${marcellus.variable} ${manrope.variable} ${jetbrainsMono.variable} ${jost.variable}`}
     >
       <body>
         <LenisProvider>{children}</LenisProvider>

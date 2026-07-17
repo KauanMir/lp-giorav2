@@ -3,7 +3,6 @@
 import { useCountdown } from '@/hooks/useCountdown'
 import { Gallery } from '@/components/product/Gallery'
 import { BuyBox } from '@/components/product/BuyBox'
-import { TrustRow } from '@/components/product/TrustRow'
 
 function HeroPromoBar() {
   const { display } = useCountdown()
@@ -23,14 +22,19 @@ function HeroPromoBar() {
 
 export function Hero() {
   return (
-    <section className="hero">
+    <section className="hero" id="checkout">
       <div className="wrap">
+        <div className="section-head" style={{ marginBottom: 28 }}>
+          <span className="eyebrow">Sua oferta exclusiva</span>
+          <h2>
+            Escolha seu <span className="accent">ritual GIORA.</span>
+          </h2>
+        </div>
         <HeroPromoBar />
         <div className="hero-grid">
           <Gallery />
           <BuyBox />
         </div>
-        <TrustRow />
       </div>
     </section>
   )

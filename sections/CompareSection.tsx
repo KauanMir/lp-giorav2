@@ -3,6 +3,7 @@
 import { useState, useRef, useCallback } from 'react'
 import { Reveal } from '@/components/ui/Reveal'
 import { CinematicImage } from '@/components/ui/CinematicImage'
+import { ScrollCta } from '@/components/ui/ScrollCta'
 import { Ic } from '@/components/ui/Icons'
 
 const FOCAL = 'center center'
@@ -94,10 +95,10 @@ export function CompareSection() {
                 valoriza a beleza natural da pele enquanto entrega hidratação e
                 sensação de pele mais saudável.
               </p>
-              <a href="#" className="synergy-cta" style={{ marginTop: 22 }}>
+              <ScrollCta to="checkout" className="synergy-cta" style={{ marginTop: 22 }}>
                 Quero minha pele dourada
                 <Ic.ChevronRight size={14} />
-              </a>
+              </ScrollCta>
             </div>
           </Reveal>
         </div>

@@ -1,7 +1,7 @@
 import { PromoBar } from '@/components/layout/PromoBar'
-import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { StickyCTA } from '@/components/layout/StickyCTA'
+import { HeroMain } from '@/sections/HeroMain'
 import { Hero } from '@/sections/Hero'
 import { Marquee } from '@/components/ui/Marquee'
 import { ManifestoSection } from '@/sections/ManifestoSection'
@@ -10,7 +10,8 @@ import { GoldenTechSection } from '@/sections/GoldenTechSection'
 import { ActivesSection } from '@/sections/ActivesSection'
 import { CompareSection } from '@/sections/CompareSection'
 import { RitualSection } from '@/sections/RitualSection'
-import { TestimonialsSection } from '@/sections/TestimonialsSection'
+// TestimonialsSection temporarily disabled — component and data kept for later use.
+// import { TestimonialsSection } from '@/sections/TestimonialsSection'
 import { ComoUsarSection } from '@/sections/ComoUsarSection'
 import { FinalCTASection } from '@/sections/FinalCTASection'
 
@@ -18,20 +19,19 @@ export default function Page() {
   return (
     <>
       <PromoBar />
-      <Header />
       <main>
-        <Hero />
-        <Marquee />
+        <HeroMain />
         <ManifestoSection />
         <ProblemsSection />
         <GoldenTechSection />
         <ActivesSection />
         <CompareSection />
         <RitualSection />
-        <TestimonialsSection />
+        {/* <TestimonialsSection /> — temporarily disabled, see import above */}
         <ComoUsarSection />
         <Marquee />
         <FinalCTASection />
+        <Hero />
       </main>
       <Footer />
       <StickyCTA />

@@ -1,4 +1,5 @@
 import { Reveal } from '@/components/ui/Reveal'
+import { ScrollCta } from '@/components/ui/ScrollCta'
 import { Ic } from '@/components/ui/Icons'
 
 export function FinalCTASection() {
@@ -48,8 +49,8 @@ export function FinalCTASection() {
             Tecnologia coreana avançada com PDRN, exossomos e ácido hialurônico.
             Glow dourado, hidratação profunda e pele rejuvenescida.
           </p>
-          <a
-            href="#"
+          <ScrollCta
+            to="checkout"
             className="cta cta-gold"
             style={{ width: 'auto', display: 'inline-flex', padding: '20px 36px', maxWidth: 460 }}
           >
@@ -57,7 +58,7 @@ export function FinalCTASection() {
             <span className="cta-arrow">
               <Ic.ChevronRight size={16} />
             </span>
-          </a>
+          </ScrollCta>
           <p
             style={{
               color: 'rgba(255,245,218,0.45)',

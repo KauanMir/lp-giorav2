@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { Ic } from '@/components/ui/Icons'
 import { StarRow } from '@/components/ui/StarRow'
 import { KitSelector } from './KitSelector'
-import { KITS, AVATAR_GRADIENTS, brl } from '@/lib/constants'
+import { KITS, brl } from '@/lib/constants'
 
 export function BuyBox() {
   const [selected, setSelected] = useState('k2')
@@ -66,34 +66,6 @@ export function BuyBox() {
       <div className="cta-sub">
         <span className="sec"><Ic.Lock /> Compra 100% segura</span>
         <span className="sec"><Ic.CreditCard /> Pix · Cartão · Boleto</span>
-      </div>
-
-      <div className="ship-box">
-        <span className="ic"><Ic.Truck /></span>
-        <div className="text">
-          <span className="t1">Frete grátis full para todo o Brasil</span>
-          <span className="t2">Despachado em até 24h úteis</span>
-        </div>
-      </div>
-
-      <div className="trust-strip">
-        <span className="ts-item"><Ic.Shield size={14} /> Garantia 30 dias</span>
-        <span className="ts-item"><Ic.Lock size={14} /> Compra 100% segura</span>
-        <span className="ts-item"><Ic.CreditCard size={14} /> 12x sem juros</span>
-      </div>
-
-      <div className="social-row">
-        <div className="avatars">
-          {AVATAR_GRADIENTS.map((gradient, i) => (
-            <span key={i} className="av" style={{ background: gradient }} />
-          ))}
-        </div>
-        <div>
-          <div className="stars-mini"><StarRow size={11} /></div>
-          <div className="text">
-            <b>Avaliações verificadas</b> de quem já usa o Sérum GIORA
-          </div>
-        </div>
       </div>
     </div>
   )

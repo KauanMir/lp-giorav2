@@ -95,10 +95,10 @@ export const PROBLEMS = [
 ]
 
 export const STEPS = [
-  { n: '01', t: 'Limpe e seque a pele.', variant: 1 as const, img: '/images/steps/s1.jpg', imgPos: 'center 35%' },
-  { n: '02', t: 'Aplique algumas gotas de GIORA no rosto.', variant: 2 as const, img: '/images/steps/s2.jpg', imgPos: 'center 40%' },
-  { n: '03', t: 'Espalhe suavemente até absorver.', variant: 5 as const, img: '/images/steps/s3.jpg', imgPos: 'center 32%' },
-  { n: '04', t: 'Aproveite o glow dourado da sua pele.', variant: 3 as const, img: '/images/steps/s4.jpg', imgPos: 'center 30%' },
+  { n: '01', t: 'Limpe e seque a pele.', variant: 1 as const, img: '/images/steps/s1-new.png', imgPos: 'center 35%' },
+  { n: '02', t: 'Aplique algumas gotas de GIORA no rosto.', variant: 2 as const, img: '/images/steps/s2.png', imgPos: 'center 40%' },
+  { n: '03', t: 'Espalhe suavemente até absorver.', variant: 5 as const, img: '/images/steps/s3.png', imgPos: 'center 32%' },
+  { n: '04', t: 'Aproveite o glow dourado da sua pele.', variant: 3 as const, img: '/images/steps/s4.png', imgPos: 'center 30%' },
 ]
 
 export const TESTIMONIALS = [

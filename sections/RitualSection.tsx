@@ -1,5 +1,5 @@
 import { Reveal } from '@/components/ui/Reveal'
-import { CinematicImage } from '@/components/ui/CinematicImage'
+import { ScrollCta } from '@/components/ui/ScrollCta'
 import { Ic } from '@/components/ui/Icons'
 
 export function RitualSection() {
@@ -21,25 +21,20 @@ export function RitualSection() {
                 GIORA não foi criado apenas para cuidar da pele.{' '}
                 <b>Foi criado para fazer você sentir sua pele mais bonita, iluminada e valiosa.</b>
               </p>
-              <a href="#" className="cta cta-gold" style={{ width: 'auto', maxWidth: 380, marginTop: 8 }}>
+              <ScrollCta to="checkout" className="cta cta-gold" style={{ width: 'auto', maxWidth: 380, marginTop: 8 }}>
                 <span className="cta-main">Quero meu Sérum GIORA</span>
                 <span className="cta-arrow">
                   <Ic.ChevronRight size={16} />
                 </span>
-              </a>
+              </ScrollCta>
             </div>
           </Reveal>
 
           <Reveal delay={120}>
             <div className="ritual-video">
-              <CinematicImage
-                src="/images/ritual/hero.jpg"
-                alt="Sérum GIORA — ritual noturno, modelo com frasco dourado ao entardecer"
-                pos="38% center"
-                sizes="(max-width: 768px) 100vw, 45vw"
-              />
+              <div className="ritual-video-placeholder" aria-hidden="true" />
               <span className="ritual-play"><Ic.Play size={28} /></span>
-              <span className="ritual-vlabel">Vídeo · Aplicação do Sérum GIORA</span>
+              <span className="ritual-vlabel">Vídeo em breve</span>
             </div>
           </Reveal>
         </div>

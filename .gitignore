@@ -29,3 +29,6 @@ next-env.d.ts
 
 # tooling
 .claude/
+
+# design exports (not needed in production)
+/GIORA-Hero-Skincare/
