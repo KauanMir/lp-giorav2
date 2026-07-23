@@ -4,7 +4,8 @@ export interface Kit {
   name: string
   desc: string
   price: number
-  save?: number
+  installment: number
+  checkoutUrl: string
   badge?: { kind: 'best' | 'deal'; label: string }
 }
 
@@ -14,24 +15,28 @@ export const KITS: Kit[] = [
     units: 1,
     name: '1 Unidade — Sérum GIORA',
     desc: 'Glow Inicial · 30 dias de ritual',
-    price: 197,
+    price: 149,
+    installment: 16.37,
+    checkoutUrl: 'https://app.coinzz.com.br/checkout/1-unidade-wh8cj-0',
   },
   {
     id: 'k2',
     units: 2,
     name: '2 Unidades — Sérum GIORA',
     desc: 'Ritual Completo · 60 dias de tratamento',
-    price: 334,
-    save: 60,
+    price: 249,
+    installment: 27.36,
+    checkoutUrl: 'https://app.coinzz.com.br/checkout/2-unidades-miojl-0',
     badge: { kind: 'best', label: 'Mais Vendido' },
   },
   {
     id: 'k3',
-    units: 4,
-    name: '4 Unidades — Sérum GIORA',
-    desc: 'Tratamento Intensivo · 120 dias contínuos',
-    price: 597,
-    save: 191,
+    units: 3,
+    name: '3 Unidades — Sérum GIORA',
+    desc: 'Tratamento Intensivo · 90 dias contínuos',
+    price: 333,
+    installment: 36.60,
+    checkoutUrl: 'https://app.coinzz.com.br/checkout/3-unidades-xuhsv-0',
     badge: { kind: 'deal', label: 'Melhor Preço' },
   },
 ]

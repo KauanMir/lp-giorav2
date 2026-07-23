@@ -1,15 +1,15 @@
 'use client'
 
-import { useState } from 'react'
 import { Ic } from '@/components/ui/Icons'
 import { StarRow } from '@/components/ui/StarRow'
 import { KitSelector } from './KitSelector'
 import { KITS, brl } from '@/lib/constants'
+import { useKitSelection } from '@/lib/kit-selection'
 
 export function BuyBox() {
-  const [selected, setSelected] = useState('k2')
+  const { selected, setSelected } = useKitSelection()
   const kit = KITS.find((k) => k.id === selected)!
-  const installment = kit.price / 10
+  const installment = kit.installment
 
   return (
     <div className="buybox">
@@ -42,7 +42,6 @@ export function BuyBox() {
 
       <div className="price-box">
         <div className="left">
-          <span className="crossed">De R$ {brl(297)}</span>
           <span className="price-installments">
             <small>12x </small>
             <b>R$ {brl(installment).split(',')[0]}<small>,{brl(installment).split(',')[1]}</small></b>
@@ -56,12 +55,12 @@ export function BuyBox() {
 
       <KitSelector kits={KITS} selected={selected} onSelect={setSelected} />
 
-      <button type="button" className="cta cta-gold">
+      <a href={kit.checkoutUrl} className="cta cta-gold">
         <span className="cta-main">Quero minha pele dourada</span>
         <span className="cta-arrow">
           <Ic.ChevronRight size={18} />
         </span>
-      </button>
+      </a>
 
       <div className="cta-sub">
         <span className="sec"><Ic.Lock /> Compra 100% segura</span>

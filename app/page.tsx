@@ -9,15 +9,17 @@ import { ProblemsSection } from '@/sections/ProblemsSection'
 import { GoldenTechSection } from '@/sections/GoldenTechSection'
 import { ActivesSection } from '@/sections/ActivesSection'
 import { CompareSection } from '@/sections/CompareSection'
-import { RitualSection } from '@/sections/RitualSection'
+// RitualSection temporarily disabled — component and data kept for later use (video pending).
+// import { RitualSection } from '@/sections/RitualSection'
 // TestimonialsSection temporarily disabled — component and data kept for later use.
 // import { TestimonialsSection } from '@/sections/TestimonialsSection'
 import { ComoUsarSection } from '@/sections/ComoUsarSection'
 import { FinalCTASection } from '@/sections/FinalCTASection'
+import { KitSelectionProvider } from '@/lib/kit-selection'
 
 export default function Page() {
   return (
-    <>
+    <KitSelectionProvider>
       <PromoBar />
       <main>
         <HeroMain />
@@ -26,7 +28,7 @@ export default function Page() {
         <GoldenTechSection />
         <ActivesSection />
         <CompareSection />
-        <RitualSection />
+        {/* <RitualSection /> — temporarily disabled, see import above */}
         {/* <TestimonialsSection /> — temporarily disabled, see import above */}
         <ComoUsarSection />
         <Marquee />
@@ -35,6 +37,6 @@ export default function Page() {
       </main>
       <Footer />
       <StickyCTA />
-    </>
+    </KitSelectionProvider>
   )
 }

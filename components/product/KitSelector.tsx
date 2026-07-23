@@ -38,9 +38,6 @@ export function KitSelector({ kits, selected, onSelect }: KitSelectorProps) {
                   <span className="each">R$ {brl(unitPrice)} cada</span>
                 )}
                 <span className="total">R$ {brl(k.price)}</span>
-                {k.save && (
-                  <span className="save">economize R$ {k.save}</span>
-                )}
               </div>
             </div>
           )
