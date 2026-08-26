@@ -2,11 +2,6 @@
 
 import { useEffect, useRef, ReactNode } from 'react'
 import gsap from 'gsap'
-import ScrollTrigger from 'gsap/ScrollTrigger'
-
-if (typeof window !== 'undefined') {
-  gsap.registerPlugin(ScrollTrigger)
-}
 
 interface RevealProps {
   children: ReactNode
@@ -14,6 +9,13 @@ interface RevealProps {
   className?: string
 }
 
+// Uses a plain IntersectionObserver instead of GSAP's ScrollTrigger. With
+// ~24 Reveal instances on the page, each ScrollTrigger.create() call forced
+// a synchronous layout read to compute the trigger's scroll position.
+// An IntersectionObserver gives the same "top 88% of viewport, once"
+// behavior without forcing layout, and lets the ScrollTrigger plugin be
+// dropped from the bundle entirely (nothing else uses it — Lenis drives
+// its own rAF loop independently).
 export function Reveal({ children, delay = 0, className = '' }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null)
 
@@ -21,11 +23,10 @@ export function Reveal({ children, delay = 0, className = '' }: RevealProps) {
     const el = ref.current
     if (!el) return
 
-    const trigger = ScrollTrigger.create({
-      trigger: el,
-      start: 'top 88%',
-      once: true,
-      onEnter: () => {
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return
+        io.disconnect()
         gsap.to(el, {
           opacity: 1,
           y: 0,
@@ -34,9 +35,13 @@ export function Reveal({ children, delay = 0, className = '' }: RevealProps) {
           ease: 'power2.out',
         })
       },
-    })
+      // rootMargin bottom -12% shrinks the effective viewport the same way
+      // ScrollTrigger's "top 88%" start position did.
+      { rootMargin: '0px 0px -12% 0px', threshold: 0 },
+    )
+    io.observe(el)
 
-    return () => trigger.kill()
+    return () => io.disconnect()
   }, [delay])
 
   return (

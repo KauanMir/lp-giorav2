@@ -1,6 +1,8 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
+import gsap from 'gsap'
+import { getScrollProgress, subscribeScrollProgress } from '@/lib/scroll'
 
 interface HeroRibbonProps {
   className: string
@@ -31,29 +33,20 @@ export function HeroRibbon({
   letterSpacing,
   dist,
 }: HeroRibbonProps) {
+  const svgRef = useRef<SVGSVGElement>(null)
   const textPathRef = useRef<SVGTextPathElement>(null)
 
   useEffect(() => {
+    const svg = svgRef.current
+    if (!svg) return
+
     const reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches)
     let cur = 0
-    let target = 0
     let last: number | null = null
     const t0 = performance.now()
 
-    function progress() {
-      const doc = document.documentElement
-      const max = doc.scrollHeight - window.innerHeight
-      const y = window.scrollY || doc.scrollTop || 0
-      return max > 4 ? Math.min(1, Math.max(0, y / max)) : 0
-    }
-
-    function onScroll() {
-      target = progress()
-    }
-    window.addEventListener('scroll', onScroll, { passive: true })
-    onScroll()
-
     function tick() {
+      const target = getScrollProgress()
       const now = performance.now()
       cur += (target - cur) * (reduce ? 1 : 0.11)
       const idle = reduce ? 0 : Math.sin((now - t0) / 1500) * 7
@@ -63,17 +56,49 @@ export function HeroRibbon({
         textPathRef.current?.setAttribute('startOffset', off.toFixed(1))
       }
     }
-    tick()
-    const timer = window.setInterval(tick, 16)
+
+    // Piggyback on the gsap ticker that's already driving Lenis's rAF loop
+    // instead of spinning up an independent setInterval/rAF loop.
+    let unsubscribeScroll: (() => void) | null = null
+    let active = false
+
+    function start() {
+      if (active) return
+      active = true
+      unsubscribeScroll = subscribeScrollProgress()
+      tick()
+      gsap.ticker.add(tick)
+    }
+
+    function stop() {
+      if (!active) return
+      active = false
+      gsap.ticker.remove(tick)
+      unsubscribeScroll?.()
+      unsubscribeScroll = null
+    }
+
+    // Fully pause the ribbon (no scroll listener, no per-frame DOM writes)
+    // whenever it's outside the viewport — this also naturally covers the
+    // CSS-hidden mobile/desktop breakpoint variant, since a display:none
+    // element never intersects.
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) start()
+        else stop()
+      },
+      { threshold: 0 },
+    )
+    io.observe(svg)
 
     return () => {
-      window.removeEventListener('scroll', onScroll)
-      window.clearInterval(timer)
+      io.disconnect()
+      stop()
     }
   }, [dist])
 
   return (
-    <svg className={className} viewBox={viewBox} preserveAspectRatio="xMidYMid slice">
+    <svg ref={svgRef} className={className} viewBox={viewBox} preserveAspectRatio="xMidYMid slice">
       <path id={pathId} d={pathD} fill="none" stroke="#1C130A" strokeWidth={strokeWidth} strokeLinecap="butt" />
       <text
         style={{ fontFamily: 'var(--jost)' }}

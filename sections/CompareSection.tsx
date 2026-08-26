@@ -61,7 +61,6 @@ export function CompareSection() {
                   alt="Pele antes do sérum GIORA"
                   pos={FOCAL}
                   sizes="(max-width: 820px) 100vw, 45vw"
-                  priority
                   imgStyle={{ filter: 'grayscale(0.22) brightness(0.88) saturate(0.72) contrast(1.04)', pointerEvents: 'none' }}
                 />
               </div>
@@ -73,7 +72,6 @@ export function CompareSection() {
                   alt="Pele depois do sérum GIORA — glow dourado"
                   pos={FOCAL}
                   sizes="(max-width: 820px) 100vw, 45vw"
-                  priority
                   imgStyle={{ filter: 'saturate(1.12) brightness(1.05) contrast(1.02) sepia(0.06)', pointerEvents: 'none' }}
                 />
               </div>

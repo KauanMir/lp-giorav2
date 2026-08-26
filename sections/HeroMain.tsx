@@ -1,9 +1,11 @@
 import Image from 'next/image'
 import { HeroRibbon } from '@/components/ui/HeroRibbon'
+import { HeroAnimationGate } from '@/components/ui/HeroAnimationGate'
 
 export function HeroMain() {
   return (
     <section className="hero-export">
+      <HeroAnimationGate />
       {/* ============================ MOBILE ============================ */}
       <div className="hero-export-mobile">
         <div className="hero-export-anim hero-export-glow-mobile" />

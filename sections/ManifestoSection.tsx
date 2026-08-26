@@ -13,7 +13,6 @@ export function ManifestoSection() {
                 alt="Sérum GIORA — modelo ao entardecer com frasco dourado"
                 pos="center 30%"
                 sizes="(max-width: 768px) 100vw, 45vw"
-                priority
               />
             </div>
           </Reveal>
