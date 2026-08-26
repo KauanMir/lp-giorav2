@@ -1,8 +1,35 @@
-import Image from 'next/image'
+import Image, { getImageProps } from 'next/image'
+import { preload } from 'react-dom'
 import { HeroRibbon } from '@/components/ui/HeroRibbon'
 import { HeroAnimationGate } from '@/components/ui/HeroAnimationGate'
 
+// Mobile and desktop each render their own priority HERO.png at a different
+// `sizes`. Without media-scoping, Next's automatic priority preload/eager
+// fetch for BOTH would each start immediately regardless of which one CSS
+// actually shows for the current breakpoint (display:none does not stop an
+// eager/priority image from loading), doubling the transfer on every visit.
+// Preloading manually via React's resource API — matching the same
+// breakpoint used by .hero-export-desktop/.hero-export-mobile in
+// globals.css — lets the browser fetch only the variant that matches the
+// current viewport; the two <Image> below are left un-prioritized since
+// this preload already gives the right one its head start, and the other
+// one (display:none) never gets requested at all.
+function preloadHero(sizes: string, media: string) {
+  const { props } = getImageProps({
+    src: '/images/novos/HERO.png',
+    alt: '',
+    width: 2916,
+    height: 1834,
+    quality: 75,
+    sizes,
+  })
+  preload(props.src, { as: 'image', imageSrcSet: props.srcSet, imageSizes: props.sizes, media })
+}
+
 export function HeroMain() {
+  preloadHero('100vw', '(max-width: 1099.98px)')
+  preloadHero('82vw', '(min-width: 1100px)')
+
   return (
     <section className="hero-export">
       <HeroAnimationGate />
@@ -35,7 +62,6 @@ export function HeroMain() {
             alt="Modelo GIORA segurando o sérum dourado"
             width={2916}
             height={1834}
-            priority
             sizes="100vw"
             className="hero-export-anim hero-export-img hero-export-img-mobile"
           />
@@ -66,7 +92,6 @@ export function HeroMain() {
           alt="Modelo GIORA segurando o sérum dourado"
           width={2916}
           height={1834}
-          priority
           sizes="82vw"
           className="hero-export-anim hero-export-img hero-export-img-desktop"
         />

@@ -48,8 +48,10 @@
 @layer base {
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
-  /* Lenis drives smooth scrolling in JS — native smooth-scroll fights its
-     virtual scroll position (double easing / stutter on anchor jumps). */
+  /* Anchor-jump smoothness (checkout CTA, StickyCTA) is requested explicitly
+     via window.scrollTo({behavior:'smooth'}) in lib/scroll.ts, which applies
+     regardless of this property — kept off so a plain '#anchor' href (e.g.
+     header nav) doesn't smooth-scroll unexpectedly on its own. */
   html { scroll-behavior: auto; }
   body {
     background: var(--bg);

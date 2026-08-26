@@ -1,11 +1,3 @@
-import type Lenis from 'lenis'
-
-let lenisInstance: Lenis | null = null
-
-export function setLenisInstance(instance: Lenis | null) {
-  lenisInstance = instance
-}
-
 // Shared page-scroll progress (0..1), read by multiple components (e.g. the
 // mobile + desktop HeroRibbon instances). A single passive scroll listener
 // is kept alive while at least one subscriber needs it, instead of every
@@ -52,11 +44,6 @@ export function scrollToId(id: string) {
   if (typeof window === 'undefined') return
   const target = id.startsWith('#') ? id : `#${id}`
   const offset = -headerOffset()
-
-  if (lenisInstance) {
-    lenisInstance.scrollTo(target, { offset, duration: 1.2 })
-    return
-  }
 
   const el = document.querySelector(target)
   if (el) {

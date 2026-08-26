@@ -14,8 +14,7 @@ interface RevealProps {
 // a synchronous layout read to compute the trigger's scroll position.
 // An IntersectionObserver gives the same "top 88% of viewport, once"
 // behavior without forcing layout, and lets the ScrollTrigger plugin be
-// dropped from the bundle entirely (nothing else uses it — Lenis drives
-// its own rAF loop independently).
+// dropped from the bundle entirely (nothing else uses it).
 export function Reveal({ children, delay = 0, className = '' }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null)
 

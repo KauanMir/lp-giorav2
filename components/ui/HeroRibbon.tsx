@@ -4,6 +4,12 @@ import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { getScrollProgress, subscribeScrollProgress } from '@/lib/scroll'
 
+// Previously set by the (now-removed) Lenis integration — kept here since
+// this ticker is still shared with Lenis's old raf-driving role: without it,
+// GSAP's ticker "catches up" with a jump after any stall (tab switch, long
+// task), which would show up as a visible snap in the ribbon's easing.
+gsap.ticker.lagSmoothing(0)
+
 interface HeroRibbonProps {
   className: string
   viewBox: string
@@ -57,8 +63,8 @@ export function HeroRibbon({
       }
     }
 
-    // Piggyback on the gsap ticker that's already driving Lenis's rAF loop
-    // instead of spinning up an independent setInterval/rAF loop.
+    // Piggyback on gsap's own shared ticker instead of spinning up an
+    // independent setInterval/rAF loop.
     let unsubscribeScroll: (() => void) | null = null
     let active = false
 

@@ -55,7 +55,6 @@ export function Gallery() {
           fill
           sizes="(max-width: 560px) 100vw, (max-width: 860px) 50vw, 40vw"
           quality={90}
-          priority={active <= 1}
           style={{ objectFit: 'cover', objectPosition: SLOTS[active].pos }}
         />
       </div>
